@@ -4,11 +4,11 @@ window.addEventListener("load", function() {
 
 });
 
-
+//PLAY AND PAUSE BUTTONS
 document.querySelector("#play").addEventListener("click", function() {
 	console.log("Play Video");
 	player1.play();
-	volume.textContent = player1.volume;
+	volume.textContent = player1.volume * 100 + "%";
 
 });
 
@@ -17,7 +17,7 @@ document.querySelector("#pause").addEventListener("click", function() {
 	player1.pause();
 });
 
-
+//MUTE BUTTON
 document.querySelector("#mute").addEventListener("click", function() {
 	if (player1.muted) {
 		player1.muted = false;
@@ -29,6 +29,7 @@ document.querySelector("#mute").addEventListener("click", function() {
 	volume.textContent = player1.volume;
   });
 
+  //SKIP BUTTON
   document.querySelector("#skip").addEventListener("click", function() {
 	if (player1.currentTime + 10 < player1.duration) {
 		player1.currentTime += 10; 
@@ -40,8 +41,8 @@ document.querySelector("#mute").addEventListener("click", function() {
   });
 
 
+  //Code for affecting the speed of the videos
   var currentSpeed = 1.0;
-
   document.querySelector("#faster").addEventListener("click", function() {
 	currentSpeed += 0.1;
 	player1.playbackRate = currentSpeed;
@@ -54,19 +55,18 @@ document.querySelector("#mute").addEventListener("click", function() {
 	console.log("New Speed: " + (currentSpeed * 100) + "%");
   });
 
-
-  document.querySelector("#slider").addEventListener("click", function() {
-  var newVolume = parseFloat(slider.value);
+//SLIDER
+  document.querySelector("#slider").addEventListener("input", function() {
+  var newVolume = this.value/100;
   player1.volume = newVolume;
-  updateVolumeInfo();
-  volume.textContent = player1.volume.toFixed(1);
+  volume.textContent = newVolume * 100 + "%";
 });
 
 
 
 //these toggle the classlist
 document.querySelector("#vintage").addEventListener("click", function() {
-	player1.classList.toggle("oldSchool");
+	player1.classList.add("oldSchool");
 
 });
 
